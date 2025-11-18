@@ -1,0 +1,295 @@
+:root {
+    --cor-baseB: #a2d240;
+    --cor-base: #1b8b00;
+    --branco: #FFFFFF;
+  }
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+header{
+    height: 90px;
+    background-color:var( --cor-base);
+}
+
+section{
+    min-height: calc(100vh - 120px);
+}
+
+footer{
+    height: 60px;
+    background-color:var( --cor-base);
+}
+
+.marcacaoTarefa{
+    max-height: calc(100vh - 210px);
+    overflow: auto;
+}
+
+.equipebtn{
+    max-height: calc(100vh - 210px);
+    overflow: auto;
+}
+
+.equipeoption:hover{
+    cursor: pointer;
+}
+
+.card-header{
+    background: var(--cor-baseB);
+    background: linear-gradient(180deg, var(--cor-baseB) 0%, var(--cor-base) 90%);
+    border:none;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: var(--branco);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.card-body{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.card-footer{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+#equipe{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#tarefa{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+
+#principal{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+
+#usuario input[type="text"],
+#usuario input[type="password"] {
+    border-radius: 24px;
+}
+
+#usuario input[type="text"]:focus,
+#usuario input[type="password"]:focus {
+    border-color: var( --cor-base);
+    box-shadow: none;
+}
+
+/* Estilos para cards de eventos */
+.event-card {
+    transition: all 0.3s ease;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+}
+
+.event-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
+    transform: translateY(-2px);
+}
+
+/* Estilos para ações de eventos */
+.event-actions {
+    display: flex !important;
+    gap: 5px !important;
+    align-items: center;
+}
+
+.event-actions button {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+    white-space: nowrap;
+    border: none !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+.event-actions .btn-warning {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
+.event-actions .btn-warning:hover {
+    background-color: #e0a800 !important;
+    transform: scale(1.05);
+}
+
+.event-actions .btn-danger {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.event-actions .btn-danger:hover {
+    background-color: #c82333 !important;
+    transform: scale(1.05);
+}
+
+.event-actions button i {
+    margin-right: 4px;
+}
+
+/* Melhorar header do card */
+.event-card .card-header {
+    cursor: pointer;
+    padding: 0 !important;
+    transition: background-color 0.2s ease;
+}
+
+.event-card .card-header:hover {
+    background-color: rgba(26, 139, 0, 0.8);
+}
+
+.event-card .card-header h5 {
+    margin: 0;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.event-card .card-header span:first-child {
+    flex: 1;
+    color: #fff;
+}
+
+/* Ícones nos botões */
+.event-actions i {
+    font-size: 14px;
+}
+
+/* ==================== MEDIA QUERIES RESPONSIVAS ==================== */
+
+/* Tablets (768px e abaixo) */
+@media (max-width: 768px) {
+    header {
+        height: 70px;
+    }
+
+    section {
+        min-height: calc(100vh - 90px);
+    }
+
+    footer {
+        height: 50px;
+        font-size: 12px;
+    }
+
+    .card-header {
+        padding: 10px 12px !important;
+    }
+
+    .card-body {
+        padding: 10px 12px !important;
+    }
+
+    .event-card .card-header h5 {
+        font-size: 14px;
+    }
+
+    .event-actions button {
+        padding: 3px 6px !important;
+        font-size: 10px !important;
+    }
+
+    .equipebtn {
+        max-height: calc(100vh - 200px);
+    }
+
+    .marcacaoTarefa {
+        max-height: calc(100vh - 200px);
+    }
+}
+
+/* Smartphones (576px e abaixo) */
+@media (max-width: 576px) {
+    header {
+        height: 60px;
+    }
+
+    section {
+        min-height: calc(100vh - 80px);
+    }
+
+    footer {
+        height: 40px;
+        font-size: 10px;
+    }
+
+    .card {
+        margin-bottom: 10px;
+    }
+
+    .card-header {
+        padding: 8px 10px !important;
+    }
+
+    .card-body {
+        padding: 8px 10px !important;
+    }
+
+    .event-card .card-header h5 {
+        font-size: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .event-actions {
+        flex-wrap: wrap;
+    }
+
+    .event-actions button {
+        padding: 2px 5px !important;
+        font-size: 9px !important;
+        flex: 1 1 45%;
+    }
+
+    .event-actions button i {
+        display: none;
+    }
+
+    #usuario input[type="text"],
+    #usuario input[type="password"] {
+        width: 100% !important;
+    }
+
+    .equipebtn {
+        max-height: calc(100vh - 180px);
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .marcacaoTarefa {
+        max-height: calc(100vh - 180px);
+    }
+
+    .row > [class*="col-"] {
+        padding: 5px;
+    }
+}
+
+/* Smartphones muito pequenos (320px - 375px) */
+@media (max-width: 375px) {
+    header {
+        height: 50px;
+    }
+
+    .card-header h5 {
+        font-size: 11px;
+    }
+
+    .event-actions button {
+        padding: 1px 4px !important;
+        font-size: 8px !important;
+    }
+
+    .btn {
+        padding: 6px 10px !important;
+        font-size: 11px;
+    }
+}

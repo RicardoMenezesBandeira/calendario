@@ -1,0 +1,192 @@
+:root {
+    --verde-claro: #a2d240;
+    --verde-escuro: #1b8b00;
+    --verde-base:#5cb85c;
+    --branco: #FFFFFF;
+  }
+
+
+body{
+    background: linear-gradient(138deg, #a2d240, #1b8b00, #5cb85c);
+    background-size: 600% 600%;
+
+    animation: AnimationName 17s ease infinite;
+}
+
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.header{
+    height: 80px;
+    
+}
+
+.section{
+    min-height: calc(100vh - 80px);
+}
+
+.login{
+    margin-top: 20vh;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.login input[type="text"],
+.login input[type="password"]{
+    width: 80%;
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+    width: 100%;
+    border-color: var(--success);
+    box-shadow: none;
+}
+
+.login input[type="submit"]{
+    transition: 0.5s;
+    border-radius: 6px;
+    background: none;
+}
+
+.login input[type="submit"]:hover {
+    background: var(--success);
+    color:white;
+    border-radius: 24px;
+}
+
+select{
+    border-radius: 24px;
+}
+
+select:focus {
+    width: 100%;
+    border-color: var(--success);
+    box-shadow: none;
+}
+
+/* ==================== MEDIA QUERIES RESPONSIVAS ==================== */
+
+/* Tablets (768px e abaixo) */
+@media (max-width: 768px) {
+    .header {
+        height: 70px;
+    }
+
+    .section {
+        min-height: calc(100vh - 70px);
+    }
+
+    .login {
+        margin-top: 15vh;
+        padding: 20px !important;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        width: 90%;
+    }
+
+    .login input[type="text"]:focus,
+    .login input[type="password"]:focus {
+        width: 100%;
+    }
+
+    .card {
+        margin: 10px 0;
+    }
+
+    h2, h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Smartphones (576px e abaixo) */
+@media (max-width: 576px) {
+    body {
+        background-size: 100% 100%;
+    }
+
+    .header {
+        height: 60px;
+    }
+
+    .section {
+        min-height: calc(100vh - 60px);
+    }
+
+    .login {
+        margin-top: 10vh;
+        padding: 15px !important;
+        border-radius: 10px;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .login input[type="text"]:focus,
+    .login input[type="password"]:focus {
+        width: 100%;
+    }
+
+    .login input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+    }
+
+    select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card {
+        margin: 5px 0;
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.1rem;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Smartphones muito pequenos (320px - 375px) */
+@media (max-width: 375px) {
+    .header {
+        height: 50px;
+    }
+
+    .login {
+        margin-top: 5vh;
+        padding: 10px !important;
+    }
+
+    h1 {
+        font-size: 1rem;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"],
+    select {
+        font-size: 14px; /* Evita zoom no iOS */
+    }
+}

@@ -1,0 +1,32 @@
+Comandos git
+git init                            - inicializa o git (controle de versão)
+git clone                           - Cria um clone identico do repositório
+git add .                           - Adiciona TODOS os arquivos ao git
+git add <nome_arquivo>              - Adiciona um arquivo específico ao git
+git commit -m "<mensagem_de_commit" - Cria um commit (alteração). Obs: a mensagem deve descrever as mudanças realizadas
+git commit --amend                  - Altera o ultimo commit feito
+git push                            - Publica alteração/commits em um servidor remoto
+git pull                            - Atualiza o repositório local conforme o remoto
+git merge                           - Junta as Branchs
+git rebase -i                       - Rebase interativo, permite fazer squash (fixup)
+git status                          - Provém informações referente ao status atual do projeto
+git log                             - Provém um histórico de atualizações (commits, hora, autor...)
+git log -p                          - Detalhar as mudanças
+git branch                          - Mostra o nome de todas as branchs
+git branch <nome_da_branch>         - Cria um novo ramo (branch)(somente cria)
+git branch -D <nome_da_branch>      - Deleta uma branch
+git checkout <nome_da_branch>       - Troca a branch do repositorio local
+git checkout -b <nome_da_branch>    - Cria um novo ramo e muda para ele
+git remote add origin <link>        - Adiciona uma origem remota (github)
+git remote rm origin                - Remove uma origem remota
+git push origin <nome_da_brunch>    - Adiciona a brush ao repositório remoto
+git push -f --set-upstream origin master
+git reset head~1                    - Remove o ultimo commit feito (repositório local)
+git reset --hard {hash-do-commit-desejado} - Voltar para um commit específico
+git diff                            - Visualizar a diferença realizadas não comitadas
+git diff origin/branch              - Visualizar a diferença entre o código atual e uma branch remota
+git diff <id1> <id2>                - Visualizar a diferença entre 2 commits
+git tag <name>                      - Cria uma tag
+git tag -a <name> <commit>          - Cria tag tardia
+git tag -d <name>                   - Deleta uma tag
+git push origin <tag_name>          - Faz o push de uma tag

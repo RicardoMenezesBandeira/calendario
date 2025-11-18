@@ -1,0 +1,193 @@
+:root {
+    --cor-baseB: #a2d240;
+    --cor-base: #1b8b00;
+    --branco: #FFFFFF;
+}
+
+.calendario{
+    height: 90%
+}
+
+.dias{
+    height: 80%
+}
+
+.child{
+    width: calc(100%/7);
+    position: relative;
+    font-size: 1.4rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.child:hover:not(.today,.prev-date,.next-date) {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    cursor: pointer;
+  }
+  
+.child > p{
+    margin: auto;
+}
+
+.prev-date,
+.next-date {
+    font-weight: 200;
+}
+  
+.today {
+    background-color: var(--cor-base);
+    color: var(--branco);
+}
+
+.diasSemana{
+
+    background-color: rgb(58, 58, 58);
+    color: var(--branco);
+    opacity: 0.5;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.meses{
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 20px 20px 0 0; 
+    background: var(--verde-claro);
+    background: linear-gradient(180deg, var(--cor-baseB) 0%, var( --cor-base) 90%);
+}
+
+.badge{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--cor-base);
+  }
+
+div.ativo.child:not(.today){
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    color: var( --cor-base);
+}
+
+.equipeoption{
+    background-color: var( --cor-base);
+    color:var(--branco);
+    transition: all 0.3s cubic-bezier(0.4,0.0,0.2,1);
+}
+
+.equipeAtiva{
+    transform: scale(0.9);
+
+}
+
+.data-headline h1, .data-headline .h1{
+    font-size: 2em;
+}
+
+.anter{
+    margin-left: 2%;
+
+}
+
+.prox{
+    margin-right: 2%;
+
+}
+
+@media (max-width: 768px) { 
+
+    .data-headline h1, .data-headline .h1{
+        font-size: 1.3em;
+    }
+
+    .child > p{
+        font-size: 0.8em;
+    }
+
+    #principal{
+        height: 90vh;
+        max-height: 590px;
+        min-height: 500px;
+    }
+
+    .equipebtn{
+        max-height: 20vh;
+    }
+
+    .equipeoption{
+        min-width: 200px;
+    }
+
+}
+
+@media (max-width: 576px) {
+    #principal {
+        height: 50vh;
+        min-height: 325px;
+    }
+
+    .child {
+        width: calc(100%/7);
+        font-size: 0.9rem;
+        padding: 5px 0;
+    }
+
+    .diasSemana {
+        font-size: 0.8rem;
+    }
+
+    .meses {
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+    }
+
+    .badge {
+        font-size: 0.7rem;
+        top: 2px;
+        right: 2px;
+    }
+
+    .anter, .prox {
+        margin: 0;
+        padding: 0 5px;
+    }
+
+    button {
+        padding: 8px 10px !important;
+        font-size: 11px;
+    }
+}
+
+/* Smartphones muito pequenos (320px - 375px) */
+@media (max-width: 375px) {
+    .calendario {
+        height: 85%;
+    }
+
+    .dias {
+        height: 75%;
+    }
+
+    .child {
+        font-size: 0.7rem;
+        padding: 3px 0;
+    }
+
+    .child > p {
+        font-size: 0.65rem;
+    }
+
+    .diasSemana {
+        font-size: 0.65rem;
+    }
+
+    .data-headline h1, .data-headline .h1 {
+        font-size: 1rem;
+    }
+
+    .meses {
+        padding: 8px;
+    }
+
+    #principal {
+        height: 45vh;
+        min-height: 280px;
+    }
+}
+
