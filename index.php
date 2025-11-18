@@ -80,10 +80,12 @@ try {
     <!-- Ícones locais (substitui kit externo que causava 403) -->
     <link rel="stylesheet" href="fluxograma_files/libs/bootstrap/bootstrap-icons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/main.css">
-    <link rel="stylesheet" href="assets/calendario.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="assets/calendario.css">
+    <link rel="stylesheet" href="assets/main.css">
 </head>
 <body>
 
@@ -98,7 +100,10 @@ try {
                     <?php 
                     if ($dados['Tipo_Usuario'] == "gerente"){
                          echo ' <li>
-                         <h2>bem vindo, '.$_SESSION['nome']. '</h2>
+                         <h3>'.$_SESSION['nome']. '</h3>
+                         </li>
+                         <li>
+                         
                          <div class="dropdown show  dropleft">
                              <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <i class="h4 fas fa-users-cog"></i>
@@ -111,6 +116,7 @@ try {
                              </div>
                              </div>
                          </li>';
+
                     }
                     ?>
 
