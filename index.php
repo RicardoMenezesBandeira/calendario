@@ -113,6 +113,7 @@ try {
                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#adduser">Adicionar Usuario</a>
                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addequipe">Adicionar Equipe</a>
                                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addrelacao">Estabelecer relação líder-equipe</a>
+                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#edituser">Edita colaborador</a>
                              </div>
                              </div>
                          </li>';
@@ -420,6 +421,126 @@ try {
         </div>
     </div>
 
+   <div class="modal fade" id="edituser" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Colaboradores</h5>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- CAMPO DE BUSCA -->
+                <input type="text" 
+                       id="buscarColaborador" 
+                       class="form-control mb-3"
+                       placeholder="Buscar colaborador...">
+
+                <!-- LISTA DE COLABORADORES -->
+                <div id="listaColaboradores">
+                    <?php
+                        $sql = $pdo->query("
+                          SELECT 
+    colaboradores.ID_Colaborador,
+    usuario.nome,
+    equipe.Nome_Equipe,
+    equipe.Numero AS equipeNumero,
+    'colaborador' AS tipo
+FROM colaboradores
+INNER JOIN usuario 
+    ON usuario.ID_Usuario = colaboradores.fk_Usuario_ID_Usuario
+LEFT JOIN equipe 
+    ON equipe.Numero = colaboradores.fk_Equipe_Numero
+
+UNION
+
+SELECT
+    lider.ID_Lider AS ID_Colaborador,
+    usuario.nome,
+    NULL AS Nome_Equipe,
+    NULL AS equipeNumero,
+    'lider' AS tipo
+FROM lider
+INNER JOIN usuario
+    ON usuario.ID_Usuario = lider.fk_Usuario_ID_Usuario
+
+ORDER BY nome ASC
+
+                        ");
+
+                        $colaboradores = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($colaboradores as $c):
+                    ?>
+
+                    <div class="card p-3 mb-2 item-colaborador">
+                        <div class="row align-items-center">
+
+                            <div class="col-md-4">
+                                <strong><?= $c['nome'] ?></strong>
+                            </div>
+
+                          <!-- SE FOR COLABORADOR: SELECT + SALVAR + EXCLUIR -->
+<?php if ($c['tipo'] === 'colaborador'): ?>
+
+    <div class="col-md-4">
+        <select class="form-control select-equipe" 
+                data-id="<?= $c['ID_Colaborador'] ?>">
+            <?php
+                $equipes = $pdo->query("SELECT Numero, Nome_Equipe FROM equipe")->fetchAll();
+
+                foreach ($equipes as $e) {
+                    $selected = ($e['Numero'] == $c['equipeNumero']) ? "selected" : "";
+                    echo "<option value='{$e['Numero']}' $selected>{$e['Nome_Equipe']}</option>";
+                }
+            ?>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <button class="btn btn-success" 
+                onclick="salvarEquipe(<?= $c['ID_Colaborador'] ?>)">
+            Salvar
+        </button>
+        <button class="btn btn-danger btn-sm"
+            onclick="deletarColaborador(<?= $c['ID_Colaborador'] ?>)">
+            Excluir
+        </button>
+    </div>
+
+<!-- SE FOR LÍDER: SOMENTE BOTÃO EXCLUIR -->
+<?php else: ?>
+
+    <div class="col-md-8 text-right">
+        <button class="btn btn-danger btn-sm"
+            onclick="deletarColaborador(<?= $c['ID_Colaborador'] ?>)">
+            Excluir Líder
+        </button>
+    </div>
+
+<?php endif; ?>
+
+                           
+                            
+
+                        </div>
+                    </div>
+
+                    <?php endforeach; ?>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" 
+                        class="btn btn-secondary" 
+                        data-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
     <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -252,4 +252,84 @@ function mostraMarcacao(event) {
   
     await fetch("./relations_add.php",options);
   };
-  
+async function salvarEquipe(idColaborador) {
+    let select = document.querySelector(`select[data-id='${idColaborador}']`);
+    let equipe = select.value;
+
+    let form = new FormData();
+    form.append("colaborador_id", idColaborador);
+    form.append("equipe", equipe);
+
+    try {
+        let response = await fetch("relations_colaborador.php", {
+            method: "POST",
+            body: form
+        });
+
+        // Lê a resposta como texto primeiro
+        let texto = await response.text();
+
+        let res;
+        try {
+    res = JSON.parse(texto);
+} catch (e) {
+    console.error("❌ RESPOSTA NÃO É JSON VÁLIDO!");
+    console.log("🔍 Conteúdo retornado pelo PHP:", texto);
+    alert("Erro: o servidor retornou uma resposta inválida.\nVerifique o console.");
+    return;
+}
+
+
+        if (!response.ok || !res.sucesso) {
+            alert("Erro: " + (res.erro ?? "Falha desconhecida"));
+            return;
+        }
+
+        alert("Equipe atualizada!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao enviar dados.");
+    }
+}
+document.getElementById("buscarColaborador").addEventListener("keyup", function() {
+    let termo = this.value.toLowerCase();
+    let itens = document.querySelectorAll(".item-colaborador");
+
+    itens.forEach(item => {
+        let nome = item.innerText.toLowerCase();
+        item.style.display = nome.includes(termo) ? "" : "none";
+    });
+});
+async function deletarColaborador(idColaborador) {
+
+    if (!confirm("Tem certeza que deseja remover este colaborador?")) {
+        return;
+    }
+
+    let form = new FormData();
+    form.append("colaborador_id", idColaborador);
+
+    let response = await fetch("delete_colaborador.php", {
+        method: "POST",
+        body: form
+    });
+
+    let texto = await response.text();
+
+    let res;
+    try {
+        res = JSON.parse(texto);
+    } catch (e) {
+        console.error("Resposta não é JSON:", texto);
+        alert("Erro inesperado no servidor.");
+        return;
+    }
+
+    if (res.sucesso) {
+        alert("Colaborador removido!");
+        document.getElementById(`colab-${idColaborador}`).remove(); // remove da lista na página
+    } else {
+        alert("Erro: " + res.erro);
+    }
+}
