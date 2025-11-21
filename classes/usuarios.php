@@ -43,6 +43,7 @@ class Usuario
             }
 
             // Verifica se email já existe
+            /*
             $sql = $this->pdo->prepare("SELECT ID_Usuario FROM usuario WHERE email = :e");
             $sql->bindValue(":e", $email);
             $sql->execute();
@@ -50,7 +51,7 @@ class Usuario
             if ($sql->rowCount() > 0) {
                 $this->msgError = "Email já cadastrado.";
                 return false;
-            }
+            }*/
 
             // Insere novo usuário
             $sql = $this->pdo->prepare(
@@ -128,12 +129,12 @@ class Usuario
                 break;
         }
     }
-    public function logar ($email, $senha)
+    public function logar ($nome, $senha)
     {
         $sql = $this->pdo->prepare(
-            "SELECT ID_Usuario FROM usuario WHERE email = :e AND senha = :s"
+            "SELECT ID_Usuario FROM usuario WHERE nome = :n AND senha = :s"
         );
-        $sql->bindValue(":e", $email);
+        $sql->bindValue(":n", $nome);
         $sql->bindValue(":s", md5($senha));
         $sql->execute();
         
@@ -145,7 +146,7 @@ class Usuario
             }
             setSessionDados('ID_Usuario', $dado['ID_Usuario']);
             // Não guardar senha em cookie (inseguro)
-            setcookie("login", $email); // Apenas login, sem senha
+            setcookie("login", $nome); // Apenas login, sem senha
             return true;
         } else {
             return false;

@@ -7,27 +7,23 @@ require_once 'config/session.php';
 
 $erro = null; // Variável para armazenar erro
 
-if(isset($_POST['email'])) {
+if(isset($_POST['nome'])) {
     try {
-        $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $nome = isset($_POST['nome']) ? trim($_POST['nome']) : '';
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : '';
         
         // Validar entrada
-        if (empty($email) || empty($senha)) {
-            throw new Exception("Email e senha são obrigatórios.");
-        }
-        
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception("Email inválido.");
+        if (empty($nome) || empty($senha)) {
+            throw new Exception("Nome e senha são obrigatórios.");
         }
         
         $u = new Usuario();
         
-        if($u->logar($email, $senha)){
+        if($u->logar($nome, $senha)){
             // Guardar tipo de usuário na sessão também
             $pdo = getPDO();
-            $sql = $pdo->prepare("SELECT Tipo_Usuario FROM usuario WHERE email = :e");
-            $sql->bindValue(":e", $email);
+            $sql = $pdo->prepare("SELECT Tipo_Usuario FROM usuario WHERE nome = :n");
+            $sql->bindValue(":n", $nome);
             $sql->execute();
             $usuario = $sql->fetch(PDO::FETCH_ASSOC);
             
@@ -38,7 +34,7 @@ if(isset($_POST['email'])) {
             header("location:index.php");
             exit;
         } else {
-            throw new Exception("Email e/ou senha estão incorretos!");
+            throw new Exception("nome e/ou senha estão incorretos!");
         }
         
     } catch (Exception $e) {
@@ -79,9 +75,9 @@ if(isset($_POST['email'])) {
                     <form id="login-form" class="form" action="auth_profile.php" method="POST">
                         <h2 class="text-center text-success card-title mb-4">Login</h2>
                         <div class="form-group">
-                            <input type="text" name="email" id="user" class="form-control" 
-                                   placeholder="E-mail" required 
-                                   value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                            <input type="text" name="nome" id="user" class="form-control" 
+                                   placeholder="Nome" required 
+                                   value="<?php echo isset($_POST['nome']) ? htmlspecialchars($_POST['nome']) : ''; ?>">
                         </div>
 
                         <div class="form-group">

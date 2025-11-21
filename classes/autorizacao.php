@@ -49,11 +49,11 @@ class Autorizacao
     }
 
     /**
-     * Verifica se o usuário é aluno
+     * Verifica se o usuário é 
      */
-    public function isAluno()
+    public function isColaborador()
     {
-        // Aluno -> Colaborador
+        //Colaborador
         return $this->tipoUsuario === 'colaborador';
     }
 

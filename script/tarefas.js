@@ -333,3 +333,27 @@ async function deletarColaborador(idColaborador) {
         alert("Erro: " + res.erro);
     }
 }
+function configurarSelectEquipe() {
+    const radios = document.querySelectorAll('input[name="tipouser"]');
+    const selectEquipe = document.getElementById('selectEquipe');
+    const selectInput = selectEquipe.querySelector("select");
+
+    function atualizarVisibilidade() {
+        const selecionado = document.querySelector('input[name="tipouser"]:checked').value;
+
+        if (selecionado === "colaborador") {
+            selectEquipe.style.display = "block";
+            selectInput.setAttribute("required", "required");
+        } else {
+            selectEquipe.style.display = "none";
+            selectInput.removeAttribute("required");
+            selectInput.value = "";
+        }
+    }
+
+    radios.forEach(r => r.addEventListener('change', atualizarVisibilidade));
+    atualizarVisibilidade(); // garante estado inicial correto
+}
+
+// Inicializa quando a página carregar
+document.addEventListener("DOMContentLoaded", configurarSelectEquipe);

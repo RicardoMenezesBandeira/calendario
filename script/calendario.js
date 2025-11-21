@@ -85,7 +85,7 @@ async function updateCalendar() {
     let equipe;
 
   if (Tipo_User == "colaborador") {
-      equipe = equipeAluno;
+      equipe = equipe;
     } else {
       const equipeAtivaEl = document.querySelector('.equipeAtiva');
       if (equipeAtivaEl) {
@@ -133,9 +133,9 @@ document.querySelector(".prox").addEventListener("click", () => {
 // Preencher o campo de equipe por padrão
 if (Tipo_User === 'colaborador') {
   try {
-    if (typeof equipeAluno !== 'undefined' && equipeAluno !== null && equipeAluno !== 'Invalido') {
+    if (typeof equipe !== 'undefined' && equipe !== null && equipe !== 'Invalido') {
       const tarefaequipeEl = document.querySelector('#tarefaequipe');
-      if (tarefaequipeEl) tarefaequipeEl.value = equipeAluno;
+      if (tarefaequipeEl) tarefaequipeEl.value = equipe;
     }
   } catch (e) {
     console.error(e);

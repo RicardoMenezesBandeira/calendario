@@ -543,56 +543,83 @@ ORDER BY nome ASC
 </div>
 
 
-    <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+   <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
 
-            <div class="modal-content">
+        <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar Usuário</h5>
+            </div>
 
-                <div class="modal-body text-center mb-1">
+            <div class="modal-body text-center mb-1">
+
                 <form class="formulario" action="register_gerente.php" method="POST">
-                        <h2 class="text-center text-success card-title mb-4">Registro</h2>
 
-                        <div class="form-group">
-                            <input type="text" name="nome" class="form-control m-auto" placeholder="Nome Completo" required  maxlength="30">
-                        </div>
+                    <h2 class="text-center text-success card-title mb-4">Registro</h2>
 
-                        <div class="form-group">
-                            <input type="text" name="email" class="form-control m-auto" placeholder="E-mail" required maxlength="40">
-                        </div>
+                    <div class="form-group">
+                        <input type="text" name="nome" class="form-control m-auto" placeholder="Nome Completo" 
+                               required maxlength="30">
+                    </div>
 
-                        <div class="form-group">
-                            <input type="text" name="senha" id="senha" class="form-control m-auto" placeholder="Senha" required maxlength="15">
-                        </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control m-auto" placeholder="E-mail"
+                               required maxlength="40">
+                    </div>
 
-                        <div class="form-group form-check">
-                            <input class="form-check-input" type="radio" name="tipouser" value="gerente" checked>
-                            <label class="form-check-label">Gerente</label>
-                        </div>
-                        <div class="form-group form-check">
-                            <input class="form-check-input" type="radio" name="tipouser" value="lider">
-                            <label class="form-check-label">Líder</label>
-                        </div>                
-                        <div class="form-group form-check">
-                            <input class="form-check-input" type="radio" name="tipouser" value="colaborador">
-                            <label class="form-check-label">colaborador</label>
-                        </div>
+                    <div class="form-group">
+                        <input type="password" name="senha" id="senha" class="form-control m-auto"
+                               placeholder="Senha (mínimo 6 caracteres)" required minlength="6" maxlength="15">
+                    </div>
 
-                        </div>  
-                    
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        </div>
-                </form>
-                </div>
+                    <div class="form-group form-check text-left">
+                        <input class="form-check-input" type="radio" name="tipouser" value="gerente" checked>
+                        <label class="form-check-label">Gerente</label>
+                    </div>
+
+                    <div class="form-group form-check text-left">
+                        <input class="form-check-input" type="radio" name="tipouser" value="lider">
+                        <label class="form-check-label">Líder</label>
+                    </div>
+
+                    <div class="form-group form-check text-left">
+                        <input class="form-check-input" type="radio" name="tipouser" value="colaborador">
+                        <label class="form-check-label">Colaborador</label>
+                    </div>
+
+                    <!-- SELECT QUE APARECE APENAS PARA COLABORADOR -->
+                    <div class="form-group mt-3" id="selectEquipe" style="display:none;">
+                        <label>Selecione a equipe:</label>
+                        <select name="equipe" class="form-control">
+                            <option value="">Selecione...</option>
+
+                             <?php 
+                                    $lista = $pdo->query("SELECT Numero, Nome_Equipe FROM equipe");
+                                    $resul = $lista->fetchAll(PDO::FETCH_ASSOC);
+
+                                    if($resul){
+                                        foreach ($resul as $i){
+                                            echo "<option value=".$i['Numero'].">".$i['Numero']." - ".$i['Nome_Equipe']."</option>";
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </select>
+                    </div>
 
             </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+
+            </form>
+
         </div>
     </div>
+</div>
 
 
 
@@ -646,10 +673,10 @@ ORDER BY nome ASC
     <script>
         var Tipo_User = "<?php echo $dados['Tipo_Usuario'];?>";
         var idLider = 0;
-        var equipeAluno = "";
+        var equipe = "";
 
         if(Tipo_User == "colaborador"){
-            equipeAluno = "<?php 
+            equipe = "<?php 
                 if(isset($equipe['fk_Equipe_Numero'])){
                     echo $equipe['fk_Equipe_Numero'];
                 }else{
@@ -667,7 +694,7 @@ ORDER BY nome ASC
         
         console.log("Tipo de usuário:", Tipo_User);
         console.log("ID Líder:", idLider);
-        console.log("Equipe Aluno:", equipeAluno);
+        console.log("Equipe:", equipe);
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

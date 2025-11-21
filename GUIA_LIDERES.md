@@ -8,7 +8,7 @@ Vá para a aba **"Console"** e procure por:
 ```
 Tipo de usuário: lider
 ID Líder: 3
-Equipe Aluno: 
+Equipe: 
 ```
 
 E quando clicar em um dia do calendário:

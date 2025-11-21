@@ -24,7 +24,7 @@
                     <form id="login-form" class="form" action="auth_profile.php" method="POST">
                         <h2 class="text-center text-success card-title mb-4">Login</h2>
                         <div class="form-group">
-                            <input type="text" name="email" id="user" class="form-control m-auto" placeholder="E-mail" required>
+                            <input type="text" name="nome" id="user" class="form-control m-auto" placeholder="Nome" required>
                         </div>
 
                         <div class="form-group">

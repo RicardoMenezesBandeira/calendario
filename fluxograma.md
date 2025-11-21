@@ -21,7 +21,7 @@ flowchart TD
     C --> I[tarefas/marcações]
 
     %% OPERACOES POR TIPO DE USUARIO
-    subgraph ALUNO
+    subgraph 
         G -->|Visualiza equipes| H
         H -->|Visualiza marcações da equipe| I
         I --> J[Não pode adicionar marcações]
