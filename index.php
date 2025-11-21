@@ -606,6 +606,25 @@ ORDER BY nome ASC
                                 ?>
                             </select>
                         </select>
+
+                    </div>
+                    <!-- SELECT QUE APARECE APENAS PARA LÍDER -->
+                    <div class="form-group mt-3" id="selectEquipeLider" style="display:none;">
+                        <label>Selecione a equipe que irá liderar:</label>
+                        <select name="equipe_lidera" class="form-control">
+                            <option value="">Selecione...</option>
+
+                            <?php 
+                                $lista = $pdo->query("SELECT Numero, Nome_Equipe FROM equipe");
+                                $resul = $lista->fetchAll(PDO::FETCH_ASSOC);
+
+                                if($resul){
+                                    foreach ($resul as $i){
+                                        echo "<option value='".$i['Numero']."'>".$i['Numero']." - ".$i['Nome_Equipe']."</option>";
+                                    }
+                                }
+                            ?>
+                        </select>
                     </div>
 
             </div>

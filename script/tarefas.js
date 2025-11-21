@@ -333,27 +333,30 @@ async function deletarColaborador(idColaborador) {
         alert("Erro: " + res.erro);
     }
 }
-function configurarSelectEquipe() {
-    const radios = document.querySelectorAll('input[name="tipouser"]');
-    const selectEquipe = document.getElementById('selectEquipe');
-    const selectInput = selectEquipe.querySelector("select");
+document.addEventListener("DOMContentLoaded", function () {
+    let radios = document.querySelectorAll("input[name='tipouser']");
+    let colaboradorSelect = document.getElementById("selectEquipe");
+    let liderSelect = document.getElementById("selectEquipeLider");
 
-    function atualizarVisibilidade() {
-        const selecionado = document.querySelector('input[name="tipouser"]:checked').value;
+    function atualizar() {
+        let radio = document.querySelector("input[name='tipouser']:checked");
 
-        if (selecionado === "colaborador") {
-            selectEquipe.style.display = "block";
-            selectInput.setAttribute("required", "required");
-        } else {
-            selectEquipe.style.display = "none";
-            selectInput.removeAttribute("required");
-            selectInput.value = "";
+        if (!radio) return;
+
+        if (radio.value === "colaborador") {
+            colaboradorSelect.style.display = "block";
+            liderSelect.style.display = "none";
+        } 
+        else if (radio.value === "lider") {
+            colaboradorSelect.style.display = "none";
+            liderSelect.style.display = "block";
+        } 
+        else {
+            colaboradorSelect.style.display = "none";
+            liderSelect.style.display = "none";
         }
     }
 
-    radios.forEach(r => r.addEventListener('change', atualizarVisibilidade));
-    atualizarVisibilidade(); // garante estado inicial correto
-}
-
-// Inicializa quando a página carregar
-document.addEventListener("DOMContentLoaded", configurarSelectEquipe);
+    radios.forEach(r => r.addEventListener("change", atualizar));
+    atualizar(); // estado inicial
+});

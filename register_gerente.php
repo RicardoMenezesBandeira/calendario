@@ -4,41 +4,65 @@ require_once 'classes/usuarios.php';
 
 $u = new Usuario();
 
-if(isset($_POST['nome'])) {
-    $nome = addslashes($_POST['nome']);
-    $email = addslashes($_POST['email']);
-    $senha = addslashes($_POST['senha']);
-    
-    // Determinar tipo de usuário baseado no contexto
-    // Se foi enviado 'equipe', é um colaborador; senão, verifica se foi enviado tipo específico
-    if(isset($_POST['equipe'])) {
-        // Registro de colaborador
-        $tipouser = 'colaborador';
-        $equipe = intval($_POST['equipe']);
-        
-        // Passar equipe como parâmetro na função cadastrar
-        $resultado = $u->cadastrar($nome, $email, $senha, $tipouser, $equipe);
-        
-        if($resultado) {
-            echo "Colaborador cadastrado com sucesso!";
-            header("location:index.php");
-        } else {
-            echo "Erro: " . $u->msgError;
-        }
-    } else {
-        // Registro padrão (sem equipe) - compatibilidade com formulários antigos
-        $tipouser = isset($_POST['tipouser']) ? $_POST['tipouser'] : 'colaborador';
-        
-        $resultado = $u->cadastrar($nome, $email, $senha, $tipouser);
-        
-        if($resultado) {
-            echo "Cadastrado com sucesso!";
-            header("location:index.php");
-        } else {
-            echo "Erro: " . $u->msgError;
-        }
-    }
-} else {
+if (!isset($_POST['nome'])) {
     header("location:no_allow.php");
+    exit;
 }
+
+$nome  = addslashes($_POST['nome']);
+$email = addslashes($_POST['email']);
+$senha = addslashes($_POST['senha']);
+
+// O formulário DEVE enviar o tipo de usuário
+if (!isset($_POST['tipouser'])) {
+    echo "Erro: tipo de usuário não informado.";
+    exit;
+}
+
+$tipouser = $_POST['tipouser'];
+
+// Tratamento baseado no tipo de usuário
+switch ($tipouser) {
+
+    case 'colaborador':
+        // Colaborador OBRIGATORIAMENTE precisa de equipe
+        if (!isset($_POST['equipe']) || empty($_POST['equipe'])) {
+            echo "Erro: equipe é obrigatória para colaboradores!";
+            exit;
+        }
+
+        $equipe = intval($_POST['equipe']);
+
+        $resultado = $u->cadastrar($nome, $email, $senha, 'colaborador', $equipe);
+
+        if ($resultado) {
+            header("location:index.php");
+            exit;
+        } else {
+            echo "Erro: " . $u->msgError;
+            exit;
+        }
+
+    break;
+
+    case 'lider':
+    case 'gerente':
+        // Líder e gerente NÃO utilizam equipe
+        $resultado = $u->cadastrar($nome, $email, $senha, $tipouser);
+
+        if ($resultado) {
+            header("location:index.php");
+            exit;
+        } else {
+            echo "Erro: " . $u->msgError;
+            exit;
+        }
+
+    break;
+
+    default:
+        echo "Erro: tipo de usuário inválido.";
+        exit;
+}
+
 ?>

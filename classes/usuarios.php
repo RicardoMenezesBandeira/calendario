@@ -82,6 +82,7 @@ class Usuario
      */
     private function criarPerfil($tipouser, $userId, $equipe = null)
     {
+       
         switch ($tipouser) {
             case "colaborador":
                 // Validar se equipe foi fornecida e é válida
