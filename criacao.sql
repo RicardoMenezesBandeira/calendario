@@ -86,52 +86,9 @@ CREATE TABLE marcacao (
 
 
 -- ------------------------------
--- Inserir equipes
--- ------------------------------
-INSERT INTO equipe (Nome_Equipe) VALUES
-('Equipe de Desenvolvimento 101'),
-('Equipe de Suporte 102'),
-('Gestão de Projetos'),
-('Comunicação');
-
--- ------------------------------
 -- Inserir usuários
 -- ------------------------------
--- Colaboradores
-INSERT INTO usuario (nome, email, senha, Tipo_Usuario) VALUES
-('Colaborador Um', 'colaborador1@test.com', MD5('1234'), 'colaborador'),
-('Colaborador Dois', 'colaborador2@test.com', MD5('1234'), 'colaborador');
-
--- Lider de equipe
-INSERT INTO usuario (nome, email, senha, Tipo_Usuario) VALUES
-('Lider Um', 'lider@test.com', MD5('1234'), 'lider');
 
 -- Gerente
 INSERT INTO usuario (nome, email, senha, Tipo_Usuario) VALUES
-('Gerente Um', 'gerente@test.com', MD5('1234'), 'gerente');
-
--- ------------------------------
--- Inserir dados nas tabelas de perfis
--- ------------------------------
--- IDs assumidos para referência:
--- Colaborador1=1, Colaborador2=2, Lider=3, Gerente=4
-INSERT INTO colaboradores (fk_Equipe_Numero, fk_Usuario_ID_Usuario) VALUES
-(1, 1),
-(2, 2);
-
-INSERT INTO lider (fk_Usuario_ID_Usuario) VALUES
-(3);
-
-INSERT INTO gerente (fk_Usuario_ID_Usuario) VALUES
-(4);
-
-
--- ------------------------------
-INSERT INTO lidera (fk_Lider_ID_Lider, fk_Equipe_Numero) VALUES
-(1, 1),
-(1, 2);
-
-INSERT INTO marcacao (titulo, Descricao, Data, Hora, fk_Equipe_Numero, fk_Lider_ID_Lider) VALUES
-('Revisão de Sprint', 'Revisão do sprint atual', '2025-10-15', '10:00', 1, 1),
-('Entrega de Documento', 'Entrega de documentação', '2025-10-20', '12:00', 2, 1);
-
+('Gerente', 'gerente@test.com', MD5('123456'), 'gerente');

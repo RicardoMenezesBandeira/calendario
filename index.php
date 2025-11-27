@@ -513,10 +513,7 @@ ORDER BY nome ASC
 <?php else: ?>
 
     <div class="col-md-8 text-right">
-        <button class="btn btn-danger btn-sm"
-            onclick="deletarColaborador(<?= $c['ID_Colaborador'] ?>)">
-            Excluir Líder
-        </button>
+        
     </div>
 
 <?php endif; ?>

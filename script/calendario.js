@@ -85,7 +85,9 @@ async function updateCalendar() {
     let equipe;
 
   if (Tipo_User == "colaborador") {
-      equipe = equipe;
+      equipe =  window.equipe;  // valor vindo do backend
+
+
     } else {
       const equipeAtivaEl = document.querySelector('.equipeAtiva');
       if (equipeAtivaEl) {
