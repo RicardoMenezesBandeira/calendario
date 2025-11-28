@@ -157,7 +157,6 @@ class Usuario
     public function editar ($id, $nome, $email, $senha)
     {
         try {
-            // Validar permissão: permite que o próprio usuário atualize seu perfil ou gerenteistradores atualizem qualquer perfil
             $auth = new Autorizacao();
             $usuarioAtualId = $auth->getIdUsuario();
 

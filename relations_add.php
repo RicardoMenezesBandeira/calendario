@@ -4,14 +4,12 @@ require_once 'config/database.php';
 require_once 'config/session.php';
 require_once 'classes/autorizacao.php';
 
-// Validar autorização (apenas gerentes)
 Autorizacao::validargerente("criar relacionamentos");
 
 try {
     $equipe = isset($_POST['equipe']) ? (int)$_POST['equipe'] : 0;
     $lider = isset($_POST['lider']) ? (int)$_POST['lider'] : 0;
 
-    // Validar entrada
     if ($equipe <= 0 || $lider <= 0) {
         http_response_code(400);
         echo json_encode([
@@ -23,7 +21,6 @@ try {
 
     $pdo = getPDO();
 
-    // Verifica se relação já existe
     $teste = $pdo->prepare(
         "SELECT * FROM lidera 
          WHERE fk_Equipe_Numero = :equipe 
@@ -42,10 +39,8 @@ try {
         exit;
     }
 
-    // Inicia transação para garantir consistência
     $pdo->beginTransaction();
 
-    // Insere relação líder-equipe
     $sql = $pdo->prepare(
         "INSERT INTO lidera (fk_Lider_ID_Lider, fk_Equipe_Numero) 
          VALUES (:lider, :equipe)"

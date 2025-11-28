@@ -13,7 +13,6 @@ $nome  = addslashes($_POST['nome']);
 $email = addslashes($_POST['email']);
 $senha = addslashes($_POST['senha']);
 
-// O formulário DEVE enviar o tipo de usuário
 if (!isset($_POST['tipouser'])) {
     echo "Erro: tipo de usuário não informado.";
     exit;
@@ -21,11 +20,9 @@ if (!isset($_POST['tipouser'])) {
 
 $tipouser = $_POST['tipouser'];
 
-// Tratamento baseado no tipo de usuário
 switch ($tipouser) {
 
     case 'colaborador':
-        // Colaborador OBRIGATORIAMENTE precisa de equipe
         if (!isset($_POST['equipe']) || empty($_POST['equipe'])) {
             echo "Erro: equipe é obrigatória para colaboradores!";
             exit;
@@ -47,7 +44,6 @@ switch ($tipouser) {
 
     case 'lider':
     case 'gerente':
-        // Líder e gerente NÃO utilizam equipe
         $resultado = $u->cadastrar($nome, $email, $senha, $tipouser);
 
         if ($resultado) {
